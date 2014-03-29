@@ -1,1 +1,84 @@
-Hello World
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>來吃服貿 資料使用示範頁</title>
+
+    <style type="text/css">
+table { 
+  border: 0; 
+  font-family: arial; 
+  font-size:14px; 
+} 
+th { 
+  background-color:yellow; 
+} 
+td { 
+  border-bottom:1 solid #000000;
+  border-left:7 solid #ffffff;
+}
+
+tr.content td { 
+  cursor: pointer;
+}
+
+tr.content:hover {
+    background: #646464;
+    color: white;
+}
+
+    </style>
+    <script src="./jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+    
+        jQuery(function() {
+
+            function genRow(data) {
+                return jQuery("<tr class='content'></tr>")
+                    .append(jQuery("<td>"+data.time+"</td>"))
+                    .append(jQuery("<td>"+data.name+"</td>"))
+                    .append(jQuery("<td>"+data.classes+"</td>"))
+                    .append(jQuery("<td><a href='"+data.href+"'>link</a></td>"));
+            }
+            
+            jQuery.ajax("./data.json", {
+                success: function(responseJson) {
+                    console.log(responseJson);
+                }
+            });
+
+
+            // var $table = jQuery("table");
+            // for(var i = 0; i < data.length; i++) {                
+            //     $table.append(genRow(data[i]));
+            // }
+
+
+
+
+        });
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                時間
+            </td>
+
+            <td>
+                場次
+            </td>
+
+            <td>
+                主題
+            </td>
+
+            <td>
+                逐字稿下載連結
+            </td>
+        </tr>
+
+        
+    </table>
+</body>
+</html>
