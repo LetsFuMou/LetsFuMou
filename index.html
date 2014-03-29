@@ -17,10 +17,6 @@ td {
   border-left:7 solid #ffffff;
 }
 
-tr.content td { 
-  cursor: pointer;
-}
-
 tr.content:hover {
     background: #646464;
     color: white;
@@ -32,25 +28,34 @@ tr.content:hover {
     
         jQuery(function() {
 
+            function formatDate(timestamp) {
+                var date = new Date(timestamp);
+                return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+            }
+
             function genRow(data) {
                 return jQuery("<tr class='content'></tr>")
-                    .append(jQuery("<td>"+data.time+"</td>"))
-                    .append(jQuery("<td>"+data.name+"</td>"))
-                    .append(jQuery("<td>"+data.classes+"</td>"))
-                    .append(jQuery("<td><a href='"+data.href+"'>link</a></td>"));
+                    .append(jQuery("<td>"+formatDate(data.date)+"</td>"))
+                    .append(jQuery("<td>"+data.hearingName+"</td>"))
+                    .append(jQuery("<td>"+data.speaker+"</td>"))
+                    .append(jQuery("<td>"+data.title+"</td>"))
+                    .append(jQuery("<td>"+data.profession+"</td>"))
+                    .append(jQuery("<td><a target='_blank' href='"+data.textLink+"'>逐字稿</a></td>"))
+                    .append(jQuery("<td><a target='_blank' href='"+data.youtubeLink+"'>YouTube</a></td>"));
             }
             
             jQuery.ajax("./data.json", {
-                success: function(responseJson) {
-                    console.log(responseJson);
-                }
+                success: function(json) {
+                    var $table = jQuery("table");
+                    for(var i = 0; i < json.length; i++) {                
+                        $table.append(genRow(json[i]));
+                    }
+                },
+                dataType: "json"
             });
 
 
-            // var $table = jQuery("table");
-            // for(var i = 0; i < data.length; i++) {                
-            //     $table.append(genRow(data[i]));
-            // }
+            
 
 
 
@@ -59,6 +64,9 @@ tr.content:hover {
     </script>
 </head>
 <body>
+    <h1> 我們將以此 json 格式發佈後續完整 19 場的公聽會發言，請願意使用資料撰寫網站者自行取用。先行撰寫網站，待完整資料完成後即可直接接上完整的資料。感謝大家！！ </h1>
+    <a href="./data.json" target="_blank"> 資料 json 於此下載 </a>
+
     <table>
         <tr>
             <td>
@@ -70,11 +78,23 @@ tr.content:hover {
             </td>
 
             <td>
-                主題
+                主講人
+            </td>
+
+            <td>
+                頭銜
+            </td>
+
+            <td>
+                行業
             </td>
 
             <td>
                 逐字稿下載連結
+            </td>
+
+            <td>
+                youtube 連結
             </td>
         </tr>
 
