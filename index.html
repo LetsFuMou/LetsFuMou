@@ -44,7 +44,7 @@ tr.content:hover {
                     .append(jQuery("<td><a target='_blank' href='"+data.youtubeLink+"'>YouTube</a></td>"));
             }
             
-            jQuery.ajax("./data.json", {
+            jQuery.ajax("./partial_data.json", {
                 success: function(json) {
                     var $table = jQuery("table");
                     for(var i = 0; i < json.length; i++) {                
@@ -64,7 +64,9 @@ tr.content:hover {
     </script>
 </head>
 <body>
-    <h1> 我們將以此 json 格式發佈後續完整 19 場的公聽會發言，請願意使用資料撰寫網站者自行取用。先行撰寫網站，待完整資料完成後即可直接接上完整的資料。感謝大家！！ </h1>
+    <h1>來知服貿 資料使用示範頁</h1>
+    <h2>此網頁是一個功能很陽春的示範網頁，使用到我們預計開放的 json 格式來撰寫網站</h2>
+    <h2> 我們將以此 json 格式發佈後續完整 19 場的公聽會發言，請願意使用資料撰寫網站者自行取用。先行撰寫網站，待完整資料完成後即可直接接上完整的資料。感謝大家！！ </h2>
     <a href="./data.json" target="_blank"> 資料 json 於此下載 </a>
 
     <table>
