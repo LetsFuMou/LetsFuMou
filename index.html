@@ -40,9 +40,27 @@ tr.content:hover {
                     .append(jQuery("<td>"+data.speaker+"</td>"))
                     .append(jQuery("<td>"+data.title+"</td>"))
                     .append(jQuery("<td>"+data.profession+"</td>"))
-                    .append(jQuery("<td><a target='_blank' href='"+data.textLink+"'>逐字稿</a></td>"))
-                    .append(jQuery("<td><a target='_blank' href='"+data.youtubeLink+"'>YouTube</a></td>"));
+                    .append(genTextLink(data.textLink))
+                    .append(genYoutubeLink(data.youtubeLink));
             }
+
+            function genTextLink(textLink) {
+                if(textLink && textLink !== "") {
+                    return jQuery("<td><a target='_blank' href='"+textLink+"'>逐字稿</a></td>");    
+                } else {
+                    return jQuery("<td>尚無逐字稿連結</td>");
+                }
+                
+            }
+
+            function genYoutubeLink(youtubeLink) {
+                if(youtubeLink && youtubeLink !== "") {
+                    return jQuery("<td><a target='_blank' href='"+youtubeLink+"'>YouTube</a></td>")
+                } else {
+                    return jQuery("<td>尚無YouTube連結</td>");
+                }
+                
+            }   
             
             jQuery.ajax("./partial_data.json", {
                 success: function(json) {
